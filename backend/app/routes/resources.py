@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from ..models import Department, Program, Batch, Section, Teacher, Course
+from ..models import Department, Program, Batch, Section, Teacher, Course, Room
 from .. import db
 
 resources_bp = Blueprint('resources', __name__)
