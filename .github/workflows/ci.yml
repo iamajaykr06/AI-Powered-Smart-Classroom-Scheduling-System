@@ -2,7 +2,7 @@ name: Smart Classroom Scheduler CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, feature/backend-complete ]
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [ main ]
