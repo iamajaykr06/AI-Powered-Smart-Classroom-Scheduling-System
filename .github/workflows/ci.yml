@@ -1,4 +1,4 @@
-name: AI-Powered Smart Classroom Scheduling System CI
+name: Smart Classroom Scheduler CI
 
 on:
   push:
