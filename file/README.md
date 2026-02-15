@@ -50,7 +50,7 @@
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd smart-classroom-frontend
+cd smart-classroom-file
 
 # Install dependencies
 npm install
