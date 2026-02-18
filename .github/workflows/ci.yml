@@ -70,7 +70,14 @@ jobs:
       - name: Install frontend dependencies
         working-directory: frontend
         run: |
-          npm ci
+          npm ci --verbose
+
+      - name: Debug Node and npm versions
+        working-directory: frontend
+        run: |
+          node --version
+          npm --version
+          ls -la
 
       - name: Build frontend
         working-directory: frontend
