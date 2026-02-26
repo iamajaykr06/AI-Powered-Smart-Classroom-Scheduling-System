@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom"
 import { Button } from "../components/ui/button"
 import { Input } from "../components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card"
-import { useToast } from "../components/Toast"
+import { useToast } from "../components/ui/use-toast"
 import authService from "../services/api/auth.service"
 
 export default function LoginPage() {
@@ -11,7 +11,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const { addToast } = useToast()
+  const { toast } = useToast()
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,14 +19,14 @@ export default function LoginPage() {
     
     try {
       await authService.login({ email, password })
-      addToast({
+      toast({
         title: "Login Successful",
         description: "Welcome back to Smart Classroom System",
-        variant: "success"
+        variant: "default"
       })
       navigate("/dashboard")
     } catch (error) {
-      addToast({
+      toast({
         title: "Login Failed",
         description: "Invalid email or password. Please try again.",
         variant: "destructive"
