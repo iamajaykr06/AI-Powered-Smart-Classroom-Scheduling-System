@@ -1,7 +1,7 @@
 import { ThemeProvider } from "./components/ThemeProvider"
-import { ToastProvider } from "./components/Toast"
+import { Toaster } from "./components/ui/toaster"
 import ErrorBoundary from "./components/ErrorBoundary"
-import './App.css'
+import { Outlet } from "react-router-dom"
 
 
 function App() {
@@ -13,11 +13,10 @@ function App() {
         enableSystem
         disableTransitionOnChange
       >
-        <ToastProvider>
-          <div className="min-h-screen bg-background text-foreground">
-            <div id="root-router-outlet" />
-          </div>
-        </ToastProvider>
+        <div className="min-h-screen bg-background text-foreground">
+          <Outlet />
+          <Toaster />
+        </div>
       </ThemeProvider>
     </ErrorBoundary>
   )

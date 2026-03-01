@@ -1,6 +1,6 @@
 import api from "./axios.config"
 
-// Types for authentication
+// Types for authentication (simplified for single-user)
 export interface LoginRequest {
   email: string
   password: string
@@ -11,7 +11,6 @@ export interface LoginResponse {
     id: string
     email: string
     name: string
-    role: string
   }
   token: string
   refreshToken: string
@@ -21,10 +20,9 @@ export interface RegisterRequest {
   email: string
   password: string
   name: string
-  role?: string
 }
 
-// Authentication service
+// Authentication service (simplified for single-user use)
 export const authService = {
   // Login user
   async login(credentials: LoginRequest): Promise<LoginResponse> {
@@ -44,7 +42,7 @@ export const authService = {
     }
   },
 
-  // Register user
+  // Register user (simplified)
   async register(userData: RegisterRequest): Promise<any> {
     try {
       const response = await api.post("/auth/register", userData)
