@@ -15,7 +15,6 @@ const registerSchema = z.object({
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
   confirmPassword: z.string(),
-  role: z.enum(['admin', 'scheduler', 'viewer']),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
@@ -48,7 +47,7 @@ export default function RegisterPage() {
     } catch (error: any) {
       toast({
         title: "Registration failed",
-        description: error.response?.data?.message || "Something went wrong",
+        description: error.response?.data?.message || "Something went wrong. Please try again.",
         variant: "destructive",
       })
     } finally {
@@ -56,7 +55,7 @@ export default function RegisterPage() {
     }
   }
 
-  // Check if already authenticated
+  // Check if user is already logged in
   if (authService.isAuthenticated()) {
     return <Navigate to="/app/dashboard" replace />
   }
@@ -65,12 +64,12 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Register</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Create Account</CardTitle>
           <CardDescription className="text-center">
-            Create an account to access the scheduling system
+            Create your Smart Classroom Scheduler account
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="space-y-4">
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="name">Full Name</Label>
@@ -79,10 +78,10 @@ export default function RegisterPage() {
                 type="text"
                 placeholder="Enter your full name"
                 {...register('name')}
-                className={errors.name ? 'border-destructive' : ''}
+                className={errors.name ? 'border-red-500' : ''}
               />
               {errors.name && (
-                <p className="text-sm text-destructive">{errors.name.message}</p>
+                <p className="text-sm text-red-500">{errors.name.message}</p>
               )}
             </div>
 
@@ -93,13 +92,13 @@ export default function RegisterPage() {
                 type="email"
                 placeholder="Enter your email"
                 {...register('email')}
-                className={errors.email ? 'border-destructive' : ''}
+                className={errors.email ? 'border-red-500' : ''}
               />
               {errors.email && (
-                <p className="text-sm text-destructive">{errors.email.message}</p>
+                <p className="text-sm text-red-500">{errors.email.message}</p>
               )}
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="password">Password</Label>
               <Input
@@ -107,10 +106,10 @@ export default function RegisterPage() {
                 type="password"
                 placeholder="Create a password"
                 {...register('password')}
-                className={errors.password ? 'border-destructive' : ''}
+                className={errors.password ? 'border-red-500' : ''}
               />
               {errors.password && (
-                <p className="text-sm text-destructive">{errors.password.message}</p>
+                <p className="text-sm text-red-500">{errors.password.message}</p>
               )}
             </div>
 
@@ -121,36 +120,32 @@ export default function RegisterPage() {
                 type="password"
                 placeholder="Confirm your password"
                 {...register('confirmPassword')}
-                className={errors.confirmPassword ? 'border-destructive' : ''}
+                className={errors.confirmPassword ? 'border-red-500' : ''}
               />
               {errors.confirmPassword && (
-                <p className="text-sm text-destructive">{errors.confirmPassword.message}</p>
+                <p className="text-sm text-red-500">{errors.confirmPassword.message}</p>
               )}
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="role">Role</Label>
-              <select
-                id="role"
-                {...register('role')}
-                className="w-full p-2 border border-input rounded-md bg-background"
-              >
-                <option value="viewer">Viewer</option>
-                <option value="scheduler">Scheduler</option>
-                <option value="admin">Admin</option>
-              </select>
-            </div>
-
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Creating account...' : 'Create account'}
+            <Button 
+              type="submit" 
+              className="w-full" 
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creating Account...' : 'Create Account'}
             </Button>
           </form>
 
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{' '}
-            <Link to="/app/login" className="text-primary hover:underline">
-              Sign in
-            </Link>
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground">
+              Already have an account?{' '}
+              <Link 
+                to="/app/login" 
+                className="text-primary hover:underline"
+              >
+                Sign in
+              </Link>
+            </p>
           </div>
         </CardContent>
       </Card>

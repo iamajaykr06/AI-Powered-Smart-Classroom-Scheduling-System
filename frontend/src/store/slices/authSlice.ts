@@ -5,7 +5,6 @@ interface User {
   id: string
   email: string
   name: string
-  role: string
 }
 
 interface AuthState {
@@ -26,7 +25,7 @@ const initialState: AuthState = {
   error: null,
 }
 
-// Async thunks
+// Async thunks (simplified for single-user)
 export const loginUser = createAsyncThunk(
   'auth/login',
   async (credentials: { email: string; password: string }, { rejectWithValue }) => {
@@ -41,7 +40,7 @@ export const loginUser = createAsyncThunk(
 
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async (userData: { name: string; email: string; password: string; role?: string }, { rejectWithValue }) => {
+  async (userData: { name: string; email: string; password: string }, { rejectWithValue }) => {
     try {
       const response = await authService.register(userData)
       return response
@@ -164,7 +163,7 @@ const authSlice = createSlice({
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.loading = false
         // For now, we don't implement actual token refresh
-        // This would be implemented when the backend API supports it
+        // This would be implemented when backend API supports it
       })
       .addCase(refreshToken.rejected, (state, action) => {
         state.loading = false
