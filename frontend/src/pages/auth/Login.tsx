@@ -38,7 +38,7 @@ export default function LoginPage() {
         title: "Login successful",
         description: "Welcome back!",
       })
-      window.location.href = '/dashboard'
+      window.location.href = '/app/dashboard'
     } catch (error: any) {
       toast({
         title: "Login failed",
@@ -52,7 +52,38 @@ export default function LoginPage() {
 
   // Check if already authenticated
   if (authService.isAuthenticated()) {
-    return <Navigate to="/dashboard" replace />
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">Already Logged In</CardTitle>
+            <CardDescription className="text-center">
+              You are currently authenticated. Would you like to logout?
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-4">
+              <Button 
+                className="w-full"
+                onClick={() => {
+                  localStorage.clear()
+                  window.location.reload()
+                }}
+              >
+                Logout & Clear Session
+              </Button>
+              <Button 
+                variant="outline"
+                className="w-full"
+                onClick={() => window.location.href = '/app/dashboard'}
+              >
+                Go to Dashboard
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    )
   }
 
   return (
@@ -101,7 +132,7 @@ export default function LoginPage() {
 
           <div className="mt-4 text-center text-sm">
             Don't have an account?{' '}
-            <Link to="/register" className="text-primary hover:underline">
+            <Link to="/app/register" className="text-primary hover:underline">
               Sign up
             </Link>
           </div>

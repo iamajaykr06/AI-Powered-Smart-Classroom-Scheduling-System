@@ -44,7 +44,7 @@ export default function RegisterPage() {
         title: "Registration successful",
         description: "Your account has been created successfully!",
       })
-      window.location.href = '/dashboard'
+      window.location.href = '/app/dashboard'
     } catch (error: any) {
       toast({
         title: "Registration failed",
@@ -58,7 +58,7 @@ export default function RegisterPage() {
 
   // Check if already authenticated
   if (authService.isAuthenticated()) {
-    return <Navigate to="/dashboard" replace />
+    return <Navigate to="/app/dashboard" replace />
   }
 
   return (
@@ -148,7 +148,7 @@ export default function RegisterPage() {
 
           <div className="mt-4 text-center text-sm">
             Already have an account?{' '}
-            <Link to="/login" className="text-primary hover:underline">
+            <Link to="/app/login" className="text-primary hover:underline">
               Sign in
             </Link>
           </div>

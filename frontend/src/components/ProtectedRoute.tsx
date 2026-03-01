@@ -21,7 +21,7 @@ export default function ProtectedRoute() {
   }, [isAuthenticated, toast])
 
   if (!isAuthenticated) {
-    return <Navigate to="/login" state={{ from: location }} replace />
+    return <Navigate to="/app/login" state={{ from: location }} replace />
   }
 
   return <Outlet />

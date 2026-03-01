@@ -73,7 +73,7 @@ export const refreshToken = createAsyncThunk(
       }
       // Implementation would depend on your backend API
       // const response = await authService.refreshToken(refreshToken)
-      // return response
+      // return { token: response.token, refreshToken: response.refreshToken }
       return null
     } catch (error: any) {
       return rejectWithValue('Token refresh failed')
@@ -163,10 +163,8 @@ const authSlice = createSlice({
       })
       .addCase(refreshToken.fulfilled, (state, action) => {
         state.loading = false
-        if (action.payload) {
-          state.token = action.payload.token
-          state.refreshToken = action.payload.refreshToken
-        }
+        // For now, we don't implement actual token refresh
+        // This would be implemented when the backend API supports it
       })
       .addCase(refreshToken.rejected, (state, action) => {
         state.loading = false

@@ -1,8 +1,7 @@
 import { ThemeProvider } from "./components/ThemeProvider"
 import { Toaster } from "./components/ui/toaster"
 import ErrorBoundary from "./components/ErrorBoundary"
-import { RouterProvider } from "react-router-dom"
-import { router } from "./router"
+import { Outlet } from "react-router-dom"
 
 
 function App() {
@@ -15,7 +14,7 @@ function App() {
         disableTransitionOnChange
       >
         <div className="min-h-screen bg-background text-foreground">
-          <RouterProvider router={router} />
+          <Outlet />
           <Toaster />
         </div>
       </ThemeProvider>

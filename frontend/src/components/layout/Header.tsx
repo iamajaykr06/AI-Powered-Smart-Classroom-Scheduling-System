@@ -58,7 +58,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
           {/* Logo and Brand */}
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-4">
             <Link to="/app/dashboard" className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">SC</span>
@@ -137,52 +137,6 @@ export default function Header() {
                   </span>
                 )}
               </Button>
-              
-              {/* Notifications Dropdown */}
-              {isMenuOpen && (
-                <div className="absolute right-0 top-12 w-80 bg-popover rounded-md border shadow-lg z-50">
-                  <div className="p-4">
-                    <div className="flex items-center justify-between mb-3">
-                      <h3 className="font-semibold">Notifications</h3>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => setNotifications([])}
-                      >
-                        Mark all as read
-                      </Button>
-                    </div>
-                    <div className="space-y-2 max-h-60 overflow-y-auto">
-                      {notifications.map((notification) => (
-                        <div
-                          key={notification.id}
-                          className={`p-3 rounded-lg border cursor-pointer transition-colors hover:bg-muted/50 ${
-                            notification.read ? 'opacity-50' : ''
-                          }`}
-                          onClick={() => markNotificationAsRead(notification.id)}
-                        >
-                          <div className="flex items-start justify-between">
-                            <div className="flex-1">
-                              <p className={`text-sm ${notification.read ? 'text-muted-foreground' : 'text-foreground'}`}>
-                                {notification.title}
-                              </p>
-                              <p className="text-xs text-muted-foreground mt-1">
-                                {notification.time}
-                              </p>
-                            </div>
-                            {!notification.read && (
-                              <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                            )}
-                          </div>
-                          <div className="text-xs text-muted-foreground">
-                            {new Date(notification.time).toLocaleString()}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* User Menu */}
@@ -204,100 +158,13 @@ export default function Header() {
                   </div>
                 )}
               </Button>
-              
-              {/* User Dropdown */}
-              {isMenuOpen && (
-                <div className="absolute right-0 top-12 w-64 bg-popover rounded-md border shadow-lg z-50">
-                  <div className="p-2">
-                    {currentUser ? (
-                      <div className="space-y-1">
-                        <div className="px-3 py-2">
-                          <div className="flex items-center space-x-2">
-                            <User className="h-4 w-4" />
-                            <div>
-                              <p className="text-sm font-medium">{currentUser.name}</p>
-                              <p className="text-xs text-muted-foreground">{currentUser.email}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <Link
-                          to="/app/dashboard"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Dashboard
-                        </Link>
-                        <Link
-                          to="/app/departments"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Departments
-                        </Link>
-                        <Link
-                          to="/app/teachers"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Teachers
-                        </Link>
-                        <Link
-                          to="/app/courses"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Courses
-                        </Link>
-                        <Link
-                          to="/app/rooms"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Rooms
-                        </Link>
-                        <Link
-                          to="/app/scheduling"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Scheduling
-                        </Link>
-                        <div className="border-t mt-2 pt-2">
-                          <Link
-                            to="/app/settings"
-                            className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                          >
-                            Settings
-                          </Link>
-                          <button
-                            onClick={handleLogout}
-                            className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors text-red-600"
-                          >
-                            <LogOut className="inline h-4 w-4 mr-2" />
-                            Logout
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="space-y-1">
-                        <Link
-                          to="/app/login"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Login
-                        </Link>
-                        <Link
-                          to="/app/register"
-                          className="block w-full text-left px-3 py-2 text-sm hover:bg-muted transition-colors"
-                        >
-                          Register
-                        </Link>
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
 
             {/* Theme Toggle */}
             <ThemeToggle />
           </div>
         </div>
-      </header>
-    </div>
+      </div>
+    </header>
   );
 }
